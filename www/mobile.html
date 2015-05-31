@@ -1,0 +1,19 @@
+<script>
+	self = {};
+	self.platform = "mobile";
+</script>
+<script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+<script src="http://192.168.1.69:1000/target/target-script-min.js#anonymous"></script>
+<script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="lib/cordova/network.js"></script>
+<script>
+function onLoad() {
+	document.addEventListener("deviceready",function(){
+		$.get("index.html",function(data){
+			$('body').append(data);
+		});
+	}, false);
+}
+</script>
+<body onload="onLoad()">
+ </body>

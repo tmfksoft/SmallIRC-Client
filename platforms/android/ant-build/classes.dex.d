@@ -1,0 +1,22 @@
+E:\Users\Thomas\Development\SmallIRC_Client\platforms\android\ant-build\classes.dex : \
+E:\Users\Thomas\Development\SmallIRC_Client\platforms\android\ant-build\classes\cz\blocshop\socketsforcordova\Consumer.class \
+E:\Users\Thomas\Development\SmallIRC_Client\platforms\android\ant-build\classes\cz\blocshop\socketsforcordova\Logging.class \
+E:\Users\Thomas\Development\SmallIRC_Client\platforms\android\ant-build\classes\cz\blocshop\socketsforcordova\SocketAdapter.class \
+E:\Users\Thomas\Development\SmallIRC_Client\platforms\android\ant-build\classes\cz\blocshop\socketsforcordova\SocketAdapterImpl$1.class \
+E:\Users\Thomas\Development\SmallIRC_Client\platforms\android\ant-build\classes\cz\blocshop\socketsforcordova\SocketAdapterImpl$2.class \
+E:\Users\Thomas\Development\SmallIRC_Client\platforms\android\ant-build\classes\cz\blocshop\socketsforcordova\SocketAdapterImpl.class \
+E:\Users\Thomas\Development\SmallIRC_Client\platforms\android\ant-build\classes\cz\blocshop\socketsforcordova\SocketAdapterOptions.class \
+E:\Users\Thomas\Development\SmallIRC_Client\platforms\android\ant-build\classes\cz\blocshop\socketsforcordova\SocketPlugin$CloseEventHandler.class \
+E:\Users\Thomas\Development\SmallIRC_Client\platforms\android\ant-build\classes\cz\blocshop\socketsforcordova\SocketPlugin$DataConsumer.class \
+E:\Users\Thomas\Development\SmallIRC_Client\platforms\android\ant-build\classes\cz\blocshop\socketsforcordova\SocketPlugin$ErrorEventHandler.class \
+E:\Users\Thomas\Development\SmallIRC_Client\platforms\android\ant-build\classes\cz\blocshop\socketsforcordova\SocketPlugin$OpenErrorEventHandler.class \
+E:\Users\Thomas\Development\SmallIRC_Client\platforms\android\ant-build\classes\cz\blocshop\socketsforcordova\SocketPlugin$OpenEventHandler.class \
+E:\Users\Thomas\Development\SmallIRC_Client\platforms\android\ant-build\classes\cz\blocshop\socketsforcordova\SocketPlugin.class \
+E:\Users\Thomas\Development\SmallIRC_Client\platforms\android\ant-build\classes\im\smallirc\client\BuildConfig.class \
+E:\Users\Thomas\Development\SmallIRC_Client\platforms\android\ant-build\classes\im\smallirc\client\CordovaApp.class \
+E:\Users\Thomas\Development\SmallIRC_Client\platforms\android\ant-build\classes\im\smallirc\client\R$attr.class \
+E:\Users\Thomas\Development\SmallIRC_Client\platforms\android\ant-build\classes\im\smallirc\client\R$drawable.class \
+E:\Users\Thomas\Development\SmallIRC_Client\platforms\android\ant-build\classes\im\smallirc\client\R$string.class \
+E:\Users\Thomas\Development\SmallIRC_Client\platforms\android\ant-build\classes\im\smallirc\client\R$xml.class \
+E:\Users\Thomas\Development\SmallIRC_Client\platforms\android\ant-build\classes\im\smallirc\client\R.class \
+E:\Users\Thomas\Development\SmallIRC_Client\platforms\android\ant-build\dexedLibs\classes-4b2ad8c6d4472d50f406696192bb8c39.jar \

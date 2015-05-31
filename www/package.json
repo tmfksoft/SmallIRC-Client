@@ -1,0 +1,7 @@
+{
+  "name": "SmallIRC",
+  "main": "desktop.html",
+  "dev": true,
+  "version":"2.2a-Dev",
+  "window": {"show": true, "frame":true}
+}
