@@ -48,7 +48,17 @@ E:\Users\Thomas\Development\SmallIRC_Client\platforms\android\assets\www\js\star
 E:\Users\Thomas\Development\SmallIRC_Client\platforms\android\assets\www\lib\cordova \
 E:\Users\Thomas\Development\SmallIRC_Client\platforms\android\assets\www\lib\nodewebkit \
 E:\Users\Thomas\Development\SmallIRC_Client\platforms\android\assets\www\lib\cordova\network.js \
+E:\Users\Thomas\Development\SmallIRC_Client\platforms\android\assets\www\lib\cordova\notification.js \
 E:\Users\Thomas\Development\SmallIRC_Client\platforms\android\assets\www\lib\nodewebkit\network.js \
+E:\Users\Thomas\Development\SmallIRC_Client\platforms\android\assets\www\lib\nodewebkit\notification.js \
 E:\Users\Thomas\Development\SmallIRC_Client\platforms\android\assets\www\plugins\cz.blocshop.socketsforcordova \
+E:\Users\Thomas\Development\SmallIRC_Client\platforms\android\assets\www\plugins\de.appplant.cordova.plugin.local-notification \
+E:\Users\Thomas\Development\SmallIRC_Client\platforms\android\assets\www\plugins\org.apache.cordova.device \
 E:\Users\Thomas\Development\SmallIRC_Client\platforms\android\assets\www\plugins\cz.blocshop.socketsforcordova\socket.js \
+E:\Users\Thomas\Development\SmallIRC_Client\platforms\android\assets\www\plugins\de.appplant.cordova.plugin.local-notification\www \
+E:\Users\Thomas\Development\SmallIRC_Client\platforms\android\assets\www\plugins\de.appplant.cordova.plugin.local-notification\www\local-notification-core.js \
+E:\Users\Thomas\Development\SmallIRC_Client\platforms\android\assets\www\plugins\de.appplant.cordova.plugin.local-notification\www\local-notification-util.js \
+E:\Users\Thomas\Development\SmallIRC_Client\platforms\android\assets\www\plugins\de.appplant.cordova.plugin.local-notification\www\local-notification.js \
+E:\Users\Thomas\Development\SmallIRC_Client\platforms\android\assets\www\plugins\org.apache.cordova.device\www \
+E:\Users\Thomas\Development\SmallIRC_Client\platforms\android\assets\www\plugins\org.apache.cordova.device\www\device.js \
 E:\Users\Thomas\Development\SmallIRC_Client\platforms\android\ant-build\AndroidManifest.xml \

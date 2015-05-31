@@ -3,7 +3,7 @@ console.log("Index JS is Alive!");
 var sock = new Networking();
 
 sock.on('connect',function(){
-	alert("Connected!");
+	new notification("Connected to IRC!").send();
 	sock.write("NICK SIRC");
 	sock.write("USER a b c :realname");
 });
@@ -20,17 +20,17 @@ sock.on('data',function(data){
 			}
 			if (ex.length > 1) {
 				if (ex[1] == "001") {
-					sock.write("JOIN #TMFKSOFT");
+					sock.write("JOIN #ruur");
 				}
 			}
 		}
 	});
 });
-sock.on('disconnect',function(){ alert('Disconnected!'); });
+sock.on('disconnect',function(){ new notification("Connected to IRC!").send(); });
 sock.connect("irc.smallirc.in",6667);
 
 $('#input button').click(function(){
-	sock.write("PRIVMSG #TMFKSOFT :"+$('#input input').val());
+	sock.write("PRIVMSG #ruur :"+$('#input input').val());
 	$('#scrollback').append("You: "+$('#input input').val()+"</br>");
 	$('#input input').val('');
 });
