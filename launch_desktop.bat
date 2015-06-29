@@ -1,2 +1,1 @@
 nw application/
-pause

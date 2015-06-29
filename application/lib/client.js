@@ -11,7 +11,7 @@ Client = function(config,server){
 	
 	this.self = {};
 	
-	this.logger = new core.Logger(config.nick+".log");
+	this.logger = new core.Logger("logs/"+config.nick+".log");
 
 	this.connect = function(){
 		if (typeof this.socket != null) {
@@ -83,7 +83,7 @@ Client = function(config,server){
 		this.logger.info("["+dest+"] <"+self.nick+"> "+msg);
 	}
 	this.action = function(dest,msg) {
-		this.write("PRIVMSG "+dest+" :"+String.fromCharCode(0)+"ACTION "+msg+String.fromCharCode(0));
+		this.write("PRIVMSG "+dest+" :"+String.fromCharCode(1)+"ACTION "+msg+String.fromCharCode(1));
 		this.logger.info("["+dest+"] * "+self.nick+" "+msg);
 	}
 	this.notice = function(dest,msg) {

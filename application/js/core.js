@@ -1,6 +1,7 @@
 console.log("Index JS is Alive!");
 
-var fs = require('fs');
+global.fileSystem = require('fs');
+
 var core = this;
 
 var config = {};
@@ -12,7 +13,7 @@ config.real = "Thomas Edwards";
 var servers = [];
 servers.push({"host":"irc.smallirc.in","port":6667,"chans":["#tmfksoft"]});
 
-var clients = [];
+global.Clients = [];
 
 console.log("Simple IRC Bot Starting up!");
 
@@ -23,29 +24,43 @@ servers.forEach(function(server){
 	console.log(server);
 	
 	c.connect();
-	c.on('ping',function(){
-		c.action("#tmfksoft","I got a ping");
-	});
 	c.on('RAW[*]',function(d){
 		c.logger.info("RAW["+d.numeric+"] "+d.string);
+		$('#windows .status[connection-id=0]').append("RAW["+d.numeric+"] "+d.string+"<br/>");
 	});
 	c.on('RAW[372]',function(d){
 		c.logger.info("[MOTD] "+d.string);
 	});
 	c.on('message',function(data){
 		console.log(data.user);
-		$('#scrollback').append("["+data.chan.name+"] &lt;"+data.user.nick+"&gt; "+data.message+"<br>");
+		$('#windows .channel[channel-name="'+data.chan.name.toLowerCase()+'"][connection-id=0] .scrollback').append(" &lt;"+data.user.nick+"&gt; "+data.message+"<br>");
 	});
-	clients.push(c);
+	global.Clients.push(c);
 });
 $(window).bind('beforeunload',function(){
 	console.log("Page closed");
-	clients.forEach(function(c){
+	global.Clients.forEach(function(c){
 		c.quit("Client Closed");
 	});
 });
-$('#input button').click(function(){
-	clients[0].msg("#tmfksoft",$('#input input').val());
-	$('#scrollback').append("You: "+$('#input input').val()+"</br>");
-	$('#input input').val('');
+$('#toolbar button').click(function(){
+	var text = $('#toolbar input').val();
+	var connid = 0;
+	var channel = "#tmfksoft";
+	
+	if (text.length <= 0 || text == "") return;
+	
+	if (text[0] == "/") {
+		var ex = text.split(" ");
+		if (ex[0].toLowerCase() == "/me") {
+			global.Clients[0].action("#tmfksoft",ex.splice(1).join(" "));
+			$('#windows .channel[channel-name="'+channel.toLowerCase()+'"][connection-id='+connid+'] .scrollback').append("* You "+ex.splice(1).join(" ")+"</br>");
+		} else {
+			global.Clients[0].write(text.substr(1));
+		}
+	} else {
+		global.Clients[0].msg("#tmfksoft",text);
+		$('#windows .channel[channel-name="'+channel.toLowerCase()+'"][connection-id='+connid+'] .scrollback').append(" <You> "+text+"</br>");
+	}
+	$('#toolbar input').val('');
 });

@@ -7,40 +7,99 @@
         <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
         <link rel="stylesheet" type="text/css" href="css/index.css" />
-        <title>Hello World</title>
+        <title>SmallIRC Client</title>
 		<style>
 			body {
 				overflow:hidden;
-			}
-			#scrollback {
-				overflow:auto;
-				position:absolute;
-				left:0;
-				width:100%;
-				top:0;
-				bottom:23px;
-				background:#111;
-				color:whiteSmoke;
-			}
-			#input {
-				position:absolute;
-				left:0;
-				bottom:0;
-				height:23px;
-				width:100%;
-			}
-			#input {
-				height:23px;
-				border:none;
-				background:white;
 			}
 			
 			#chanlist {
 				background:#111;
 				border-right:3px silver;
 				width:150px;
+				
+				left:0;
+				top:0;
+				bottom:32px;
+				position:fixed;
+			}
+			#windows {
+				position:fixed;
+				left:150px;
+				top:0;
+				bottom:32px;
+				right:0;
+			}
+			#windows .window {
+				position:absolute;
+				left:0;
+				top:0;
+				width:100%;
 				height:100%;
 				
+				display:none;
+				
+				background:#111;
+			}
+			#windows .window.active {
+				display:block;
+			}
+			
+			#windows .channel .scrollback {
+				position:absolute;
+				left:0;
+				top:20px;
+				right:150px;
+				bottom:0px;
+				
+				color:white;
+				font-size:15px;
+				
+				background:green;
+			}
+			#windows .channel .topic {
+				position:absolute;
+				left:0;
+				right:0;
+				top:0;
+				height:20px;
+				background:yellow;
+			}
+			#windows .channel .userlist {
+				width:150px;
+				position:absolute;
+				right:0;
+				top:20px;
+				bottom:0px;
+				background:red;
+			}
+			#windows .status {
+				color:white;
+				background:#111;
+				font-size:15px;
+				overflow:scroll;
+			}
+			
+			#toolbar {
+				background-color:red;
+				
+				position:fixed;
+				left:0;
+				bottom:0;
+				right:0;
+				
+				height:32px;
+			}
+			#toolbar .send {
+				position: absolute;
+				top: 5px;
+				right: 5px;
+			}
+			#toolbar .message {
+				position: absolute;
+				left: 5px;
+				top: 5px;
+				right: 20px;
 			}
 		</style>
     </head>
@@ -49,15 +108,19 @@
 			Servers and channels here.
 		</div>
 		<div id="windows">
-			<div class="server" server-id="0">
-			
+			<div class="window status" connection-id="0"></div>
+			<div class="window channel active" connection-id="0" channel-name="#tmfksoft">
+				<div class="topic"></div>
+				<div class="scrollback"></div>
+				<div class="userlist"></div>
 			</div>
 		</div>
 		<div id="toolbar">
-			Input goes here.
+			<input class="message"></input><button class="send">Send</button>
 		</div>
     </body>
 	<script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
+	<script type="text/javascript" src="lib/windows.js"></script>
 	<script type="text/javascript" src="lib/network.js"></script>
 	<script type="text/javascript" src="lib/notification.js"></script>
 	<script type="text/javascript" src="lib/logger.js"></script>
