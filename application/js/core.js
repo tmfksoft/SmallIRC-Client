@@ -60,7 +60,7 @@ $('#toolbar button').click(function(){
 		}
 	} else {
 		global.Clients[0].msg("#tmfksoft",text);
-		$('#windows .channel[channel-name="'+channel.toLowerCase()+'"][connection-id='+connid+'] .scrollback').append(" <You> "+text+"</br>");
+		$('#windows .channel[channel-name="'+channel.toLowerCase()+'"][connection-id='+connid+'] .scrollback').append(" &lt;You&gt; "+text+"</br>");
 	}
 	$('#toolbar input').val('');
 });
