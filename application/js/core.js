@@ -12,6 +12,7 @@ config.real = "Thomas Edwards";
 
 var servers = [];
 servers.push({"host":"irc.smallirc.in","port":6667,"chans":["#SIRC-Client"]});
+servers.push({"host":"irc.spi.gt","port":6667,"chans":["#Fudgie"]});
 
 global.Clients = [];
 
@@ -19,39 +20,55 @@ console.log("Simple IRC Bot Starting up!");
 
 servers.forEach(function(server){
 	var c = new Client(config,server);
+	global.Clients.push(c);
+	var cid = global.Clients.indexOf(c);
 	console.log("CREATING CLIENT");
 	console.log(config);
 	console.log(server);
+	if ($('#windows .status[connection-id='+cid+']').length <= 0) {
+		$('#windows').append('<div class="window status" connection-id="'+cid+'"></div>');
+		focusWindow(cid,"status");
+	}
 	
 	c.connect();
+	c.on('connected',function(){
+		updateWindowList();
+	});
 	c.on('RAW[*]',function(d){
 		c.logger.info("RAW["+d.numeric+"] "+d.string);
-		$('#windows .status[connection-id=0]').append("RAW["+d.numeric+"] "+d.string+"<br/>");
+		$('#windows .status[connection-id='+cid+']').append("RAW["+d.numeric+"] "+d.string+"<br/>");
 	});
 	c.on('RAW[372]',function(d){
 		c.logger.info("[MOTD] "+d.string);
 	});
 	c.on('CLIENT[332]',function(ch){
-		$('#windows .channel[target="'+ch.name.toLowerCase()+'"][connection-id=0] .topic').html(ch.topic.message);
-		$('#windows .channel[target="'+ch.name.toLowerCase()+'"][connection-id=0] .scrollback').append("Topic is "+ch.topic.message+"<br>");
+		var topic = ch.topic.message;
+		if (ch.topic.message == "") {
+			topic = "No Topic"
+		}
+		$('#windows .channel[target="'+ch.name.toLowerCase()+'"][connection-id='+cid+'] .topic').html(topic);
+		if (ch.topic.message != "") $('#windows .channel[target="'+ch.name.toLowerCase()+'"][connection-id='+cid+'] .scrollback').append("Topic is "+topic+"<br>");
 	});
 	c.on('message',function(data){
 		console.log(data.user);
-		$('#windows .channel[target="'+data.chan.name.toLowerCase()+'"][connection-id=0] .scrollback').append(" &lt;"+data.user.nick+"&gt; "+data.message+"<br>");
+		$('#windows .channel[target="'+data.chan.name.toLowerCase()+'"][connection-id='+cid+'] .scrollback').append(" &lt;"+data.user.nick+"&gt; "+data.message+"<br>");
 	});
 	c.on('join',function(data){
-		if ($('#windows .channel[target="'+data.chan.name.toLowerCase()+'"][connection-id=0]').length <= 0) {
-			$('#windows').append('<div class="window channel" connection-id="0" target="'+data.chan.name.toLowerCase()+'"><div class="topic"></div><div class="scrollback"></div><div class="userlist">Userlist here</div></div>');
-			focusWindow(0,"channel",data.chan.name);
+		if ($('#windows .channel[target="'+data.chan.name.toLowerCase()+'"][connection-id='+cid+']').length <= 0) {
+			$('#windows').append('<div class="window channel" connection-id="'+cid+'" target="'+data.chan.name.toLowerCase()+'"><div class="topic">No Topic</div><div class="scrollback"></div><div class="userlist">Userlist here</div></div>');
+			focusWindow(cid,"channel",data.chan.name);
 		}
 		updateWindowList();
 	});
-	global.Clients.push(c);
 });
 function updateWindowList(){
 	$('#chanlist').html('');
 	global.Clients.forEach(function(c,cid){
-		$('#chanlist').append('<div type="status" connection-id="'+cid+'">Connection #'+cid+'</h3>');
+		if (typeof c.srv.name != "undefined") {
+			$('#chanlist').append('<div type="status" connection-id="'+cid+'">'+c.srv.name+'</div>');
+		} else {
+			$('#chanlist').append('<div type="status" connection-id="'+cid+'">'+c.srv.host+'</div>');
+		}
 		c.channels.forEach(function(ch){
 			$('#chanlist').append('<div type="channel" target="'+ch.name+'" connection-id="'+cid+'">'+ch.name+'</div>');
 		});
@@ -91,6 +108,11 @@ $('#toolbar button').click(function(){
 	var connid = $('#windows .active').attr("connection-id");
 	var channel = $('#windows .active').attr("target");
 	var type = "";
+	var nick = "???";
+	var client = null;
+	
+	if (typeof global.Clients[connid] != "undefined") client = global.Clients[connid];
+	if (client != null) nick = client.cfg.nick;
 	
 	if ($('#windows .active').hasClass("channel")) type = "channel";
 	if ($('#windows .active').hasClass("status")) type = "status";
@@ -100,14 +122,14 @@ $('#toolbar button').click(function(){
 	if (text[0] == "/") {
 		var ex = text.split(" ");
 		if (ex[0].toLowerCase() == "/me") {
-			global.Clients[0].action(channel,ex.splice(1).join(" "));
-			$('#windows .channel[target="'+channel.toLowerCase()+'"][connection-id='+connid+'] .scrollback').append("* You "+ex.splice(1).join(" ")+"</br>");
+			global.Clients[connid].action(channel,ex.splice(1).join(" "));
+			$('#windows .channel[target="'+channel.toLowerCase()+'"][connection-id='+connid+'] .scrollback').append("* "+nick+" "+ex.splice(1).join(" ")+"</br>");
 		} else {
-			global.Clients[0].write(text.substr(1));
+			global.Clients[connid].write(text.substr(1));
 		}
 	} else {
-		global.Clients[0].msg(channel,text);
-		$('#windows .channel[target="'+channel.toLowerCase()+'"][connection-id='+connid+'] .scrollback').append(" &lt;You&gt; "+text+"</br>");
+		global.Clients[connid].msg(channel,text);
+		$('#windows .channel[target="'+channel.toLowerCase()+'"][connection-id='+connid+'] .scrollback').append(" &lt;"+nick+"&gt; "+text+"</br>");
 	}
 	$('#toolbar input').val('');
 });

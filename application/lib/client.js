@@ -48,7 +48,7 @@ Client = function(config,server){
 									// We're accepted.
 									self.connected = true;
 									self.fireEvent("connected");
-									
+									self.srv.name = ex[6].trim();
 									self.self.nick = parent.cfg.nick;
 									
 									// Join Channels
