@@ -31,6 +31,10 @@ servers.forEach(function(server){
 	c.on('RAW[372]',function(d){
 		c.logger.info("[MOTD] "+d.string);
 	});
+	c.on('CLIENT[332]',function(ch){
+		$('#windows .channel[channel-name="'+ch.name.toLowerCase()+'"][connection-id=0] .topic').html(ch.topic.message);
+		$('#windows .channel[channel-name="'+ch.name.toLowerCase()+'"][connection-id=0] .scrollback').append("Topic is "+ch.topic.message+"<br>");
+	});
 	c.on('message',function(data){
 		console.log(data.user);
 		$('#windows .channel[channel-name="'+data.chan.name.toLowerCase()+'"][connection-id=0] .scrollback').append(" &lt;"+data.user.nick+"&gt; "+data.message+"<br>");

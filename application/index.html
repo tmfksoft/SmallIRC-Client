@@ -15,8 +15,8 @@
 			
 			#chanlist {
 				background:#111;
-				border-right:3px silver;
-				width:150px;
+				border-right:2px silver;
+				width:148px;
 				
 				left:0;
 				top:0;
@@ -53,25 +53,36 @@
 				bottom:0px;
 				
 				color:white;
-				font-size:15px;
+				font-size:12px;
 				
-				background:green;
+				padding-left:5px;
+				padding-right:5px;
+				padding-top:5px;
+				
+				background:black;
 			}
 			#windows .channel .topic {
 				position:absolute;
 				left:0;
 				right:0;
 				top:0;
-				height:20px;
-				background:yellow;
+				height:19px;
+				background: #111;
+				font-size: 12px;
+				overflow: hidden;
+				color: whiteSmoke;
+				line-height:19px;
+				
+				border-bottom:solid 1px whiteSmoke;
 			}
 			#windows .channel .userlist {
-				width:150px;
+				width:149px;
 				position:absolute;
 				right:0;
 				top:20px;
 				bottom:0px;
-				background:red;
+				background:#111;
+				border-left:solid 1px whiteSmoke;
 			}
 			#windows .status {
 				color:white;
@@ -81,7 +92,7 @@
 			}
 			
 			#toolbar {
-				background-color:red;
+				background-color:whiteSmoke;
 				
 				position:fixed;
 				left:0;
@@ -112,7 +123,7 @@
 			<div class="window channel active" connection-id="0" channel-name="#tmfksoft">
 				<div class="topic"></div>
 				<div class="scrollback"></div>
-				<div class="userlist"></div>
+				<div class="userlist">Userlist goes here</div>
 			</div>
 		</div>
 		<div id="toolbar">

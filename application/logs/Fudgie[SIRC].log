@@ -3,8 +3,8 @@
 [INFO] [C] USER thomas * * :Thomas Edwards
 [INFO] RAW[NOTICE] *** Looking up your hostname...
 [INFO] RAW[NOTICE] *** Found your hostname (cached)
-[INFO] [C] PONG :BF174D81
-[INFO] RAW[:BF174D81] 
+[INFO] [C] PONG :26A70F60
+[INFO] RAW[:26A70F60] 
 [INFO] [C] JOIN #tmfksoft
 [INFO] RAW[001] Welcome to the SmallIRC IRC Network Fudgie[SIRC]!thomas@host81-135-230-196.range81-135.btcentralplus.com
 [INFO] RAW[002] Your host is doctor.smallirc.in, running version Unreal3.2.10.4
@@ -13,12 +13,12 @@
 [INFO] RAW[005] HNAMES NAMESX SAFELIST HCN MAXCHANNELS=200 CHANLIMIT=#:200 MAXLIST=b:60,e:60,I:60 NICKLEN=30 CHANNELLEN=32 TOPICLEN=307 KICKLEN=307 AWAYLEN=307 MAXTARGETS=20 :are supported by this server
 [INFO] RAW[005] ALLCHOPS WATCH=128 WATCHOPTS=A SILENCE=15 MODES=12 CHANTYPES=# PREFIX=(qaohv)~&@%+ CHANMODES=beI,kfL,lj,psmntirRcOAQKVCuzNSMTGZ NETWORK=SmallIRC CASEMAPPING=ascii EXTBAN=~,qjncrRaT ELIST=MNUCT STATUSMSG=~&@%+ :are supported by this server
 [INFO] RAW[005] XCEPTS INVEX CMDS=KNOCK,MAP,DCCALLOW,USERIP,STARTTLS :are supported by this server
-[INFO] RAW[251] There are 1 users and 28 invisible on 2 servers
+[INFO] RAW[251] There are 1 users and 29 invisible on 2 servers
 [INFO] RAW[252] 5 :operator(s) online
 [INFO] RAW[254] 2 :channels formed
-[INFO] RAW[255] I have 17 clients and 1 servers
-[INFO] RAW[265] 7 280 :Current local users 17, max 280
-[INFO] RAW[266] 9 292 :Current global users 29, max 292
+[INFO] RAW[255] I have 18 clients and 1 servers
+[INFO] RAW[265] 8 280 :Current local users 18, max 280
+[INFO] RAW[266] 0 292 :Current global users 30, max 292
 [INFO] RAW[375] - doctor.smallirc.in Message of the Day - 
 [INFO] [MOTD] - 1/3/2015 17:54
 [INFO] [MOTD] -      _________.______________________  
@@ -71,9 +71,10 @@
 [INFO] RAW[MODE] +iwx
 [INFO] RAW[NOTICE] Hey there! You know you can safe guard your nick by registering it? /msg NickServ REGISTER password email
 [INFO] RAW[JOIN] 
-[INFO] RAW[332] tmfksoft :WHERES THE BLACKSMITH!? -  Press B to Blow. - http://pastebin.com/ZyfM4XhD - <13~Sidara> My vagina...hurts so much - <~Lexi> gives my heart a boner - <~Sidara> the only perm a guy has is his sperms - Stream: https://beam.pro/Thomas
+[INFO] RAW[332] tmfksoft
 [INFO] RAW[333] tmfksoft Fudgie 1435533647
-[INFO] RAW[353]  #tmfksoft :Fudgie[SIRC] ~Linkin ~macwolf74 ~therock247uk +adc ~Fudgie ~gbyers ~NyanCat ~christian ~Alias +GLolol ~katrina ~Dead-i +Luke &GLaDOS ~DG 
+[INFO] RAW[353]  #tmfksoft :Fudgie[SIRC] therock247uk[SIRC] ~Linkin ~macwolf74 ~therock247uk +adc ~Fudgie ~gbyers ~NyanCat ~christian ~Alias +GLolol ~katrina ~Dead-i +Luke &GLaDOS ~DG 
 [INFO] RAW[366] tmfksoft :End of /NAMES list.
-[INFO] [C] PRIVMSG #tmfksoft :Just you have to press the send button on the right side of the screen.
-[INFO] [#tmfksoft] <undefined> Just you have to press the send button on the right side of the screen.
+[INFO] [C] PRIVMSG #tmfksoft :._.
+[INFO] [#tmfksoft] <undefined> ._.
+-135-230-196.range81-135.btcentralplus.com] (Quit: Client Closed)

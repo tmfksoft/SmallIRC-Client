@@ -55,13 +55,32 @@ Client = function(config,server){
 									for (var ch in self.srv.chans) {
 										self.write("JOIN "+self.srv.chans[ch]);
 									}
+								} else if (ex[1] == "332") {
+									var ch = ex[3].trim();
+									var topic = ex.splice(4).join(" ").substr(1).trim();
+									if (self.getChannel(ch) != null) {
+										var channel = self.getChannel(ch);
+										channel.topic.message = topic;
+										self.fireEvent("CLIENT[332]",channel);
+									}
 								} else if (ex[1] == "PRIVMSG") {
 									var msg = ex.slice(3).join(" ").slice(1);
 									
 									var data = {"message":msg,"user":new User(ex[0]),"chan":self.getChannel(ex[2])};
 									self.fireEvent("message",data);
 								} else if (ex[1] == "JOIN") {
+									// Join event.
+									console.log("A user joined a channel");
 									
+									var ch = ex[2].substr(1);
+									
+									if (self.getChannel(ch) == null) {
+										self.channels.push(new Channel(ch));
+									}
+									var user = new User(ex[0]);
+									var data = {"user":user,"chan":self.getChannel(ch)};
+									console.log(data);
+									self.fireEvent("join",data);
 								}
 								if (!self.hasEvent("RAW["+ex[1]+"]")) self.fireEvent("RAW[*]",{"numeric":ex[1],"string":ex.slice(3).join(" ").substr(1),"raw":ex.join(" ")});
 								self.fireEvent("RAW["+ex[1]+"]",{"numeric":ex[1],"string":ex.slice(3).join(" ").substr(1),"raw":ex.join(" ")});
@@ -96,8 +115,11 @@ Client = function(config,server){
 			this.write("QUIT");
 		}
 	}
-	this.getChannel = function(ch) {
-		return new Channel(ch);
+	this.getChannel = function(chan) {
+		for (ch in this.channels) {
+			if (this.channels[ch].name.toLowerCase() === chan.toLowerCase()) return this.channels[ch];
+		}
+		return null;
 	}
 	
 	// Events.
@@ -134,9 +156,9 @@ Client = function(config,server){
 	}
 }
 Channel = function(name){
-	this.name = name;
+	this.name = name.trim();
 	this.users = [];
-	this.topic = "";
+	this.topic = {};
 	this.modes = [];
 }
 User = function(host){
