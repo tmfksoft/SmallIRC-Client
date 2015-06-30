@@ -22,6 +22,7 @@
 				top:0;
 				bottom:32px;
 				position:fixed;
+				cursor:default;
 			}
 			#chanlist div {
 				background: #343434;
@@ -36,6 +37,9 @@
 			#chanlist div.active {
 				background:whiteSmoke;
 				color:#111;
+			}
+			#chanlist div[type=status] {
+				font-weight:bold;
 			}
 			#windows {
 				position:fixed;
@@ -67,12 +71,12 @@
 				bottom:0px;
 				
 				color:white;
-				font-size:12px;
+				font-size:14px;
 				
 				padding-left:5px;
 				padding-right:5px;
 				padding-top:5px;
-				
+				white-space:pre;
 				background:black;
 			}
 			#windows .channel .topic {
@@ -103,6 +107,18 @@
 				background:#111;
 				font-size:15px;
 				overflow:scroll;
+				white-space:pre;
+				padding-left:5px;
+				padding-right:5px;
+			}
+			#windows .query {
+				color:white;
+				background:#111;
+				font-size:15px;
+				overflow:scroll;
+				white-space:pre;
+				padding-left:5px;
+				padding-right:5px;
 			}
 			
 			#toolbar {
@@ -122,9 +138,14 @@
 			}
 			#toolbar .message {
 				position: absolute;
-				left: 255px;
+				left: 155px;
 				top: 5px;
-				right: 20px;
+				bottom:5px;
+				right:52px;
+			}
+			#toolbar .message input {
+				width:100%;
+				height:100%;
 			}
 		</style>
     </head>
@@ -135,7 +156,7 @@
 		<div id="windows">
 		</div>
 		<div id="toolbar">
-			<input class="message"></input><button class="send">Send</button>
+			<div class="message"><input></input></div><button class="send">Send</button>
 		</div>
     </body>
 	<script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>

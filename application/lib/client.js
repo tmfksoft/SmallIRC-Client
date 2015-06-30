@@ -64,9 +64,13 @@ Client = function(config,server){
 										self.fireEvent("CLIENT[332]",channel);
 									}
 								} else if (ex[1] == "PRIVMSG") {
-									var msg = ex.slice(3).join(" ").slice(1);
-									
-									var data = {"message":msg,"user":new User(ex[0]),"chan":self.getChannel(ex[2])};
+									var msg = ex.slice(3).join(" ").slice(1).trim();
+									var data = {"message":msg,"user":new User(ex[0])};
+									if (ex[2][0] == "#") {
+										data.dest = self.getChannel(ex[2].trim());
+									} else {
+										data.dest = new User(self.cfg.nick);
+									}
 									self.fireEvent("message",data);
 								} else if (ex[1] == "JOIN") {
 									// Join event.
@@ -83,8 +87,8 @@ Client = function(config,server){
 									console.log(data);
 									self.fireEvent("join",data);
 								}
-								if (!self.hasEvent("RAW["+ex[1]+"]")) self.fireEvent("RAW[*]",{"numeric":ex[1],"string":ex.slice(3).join(" ").substr(1),"raw":ex.join(" ")});
-								self.fireEvent("RAW["+ex[1]+"]",{"numeric":ex[1],"string":ex.slice(3).join(" ").substr(1),"raw":ex.join(" ")});
+								if (!self.hasEvent("RAW["+ex[1]+"]")) self.fireEvent("RAW[*]",{"numeric":ex[1],"string":ex.slice(3).join(" ").substr(1).trim(),"raw":ex.join(" ")});
+								self.fireEvent("RAW["+ex[1]+"]",{"numeric":ex[1],"string":ex.slice(3).join(" ").substr(1).trim(),"raw":ex.join(" ")});
 							} else {
 								self.logger.info("[S] "+ln);
 							}
