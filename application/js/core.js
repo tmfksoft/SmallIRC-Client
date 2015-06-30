@@ -11,7 +11,7 @@ config.user = "thomas";
 config.real = "Thomas Edwards";
 
 var servers = [];
-servers.push({"host":"irc.smallirc.in","port":6667,"chans":["#tmfksoft"]});
+servers.push({"host":"irc.smallirc.in","port":6667,"chans":["#SIRC-Client"]});
 
 global.Clients = [];
 
@@ -32,16 +32,16 @@ servers.forEach(function(server){
 		c.logger.info("[MOTD] "+d.string);
 	});
 	c.on('CLIENT[332]',function(ch){
-		$('#windows .channel[channel-name="'+ch.name.toLowerCase()+'"][connection-id=0] .topic').html(ch.topic.message);
-		$('#windows .channel[channel-name="'+ch.name.toLowerCase()+'"][connection-id=0] .scrollback').append("Topic is "+ch.topic.message+"<br>");
+		$('#windows .channel[target="'+ch.name.toLowerCase()+'"][connection-id=0] .topic').html(ch.topic.message);
+		$('#windows .channel[target="'+ch.name.toLowerCase()+'"][connection-id=0] .scrollback').append("Topic is "+ch.topic.message+"<br>");
 	});
 	c.on('message',function(data){
 		console.log(data.user);
-		$('#windows .channel[channel-name="'+data.chan.name.toLowerCase()+'"][connection-id=0] .scrollback').append(" &lt;"+data.user.nick+"&gt; "+data.message+"<br>");
+		$('#windows .channel[target="'+data.chan.name.toLowerCase()+'"][connection-id=0] .scrollback').append(" &lt;"+data.user.nick+"&gt; "+data.message+"<br>");
 	});
 	c.on('join',function(data){
-		if ($('#windows .channel[channel-name="'+data.chan.name.toLowerCase()+'"][connection-id=0]').length <= 0) {
-			$('#windows').append('<div class="window channel" connection-id="0" channel-name="'+data.chan.name.toLowerCase()+'"><div class="topic"></div><div class="scrollback"></div><div class="userlist">Userlist here</div></div>');
+		if ($('#windows .channel[target="'+data.chan.name.toLowerCase()+'"][connection-id=0]').length <= 0) {
+			$('#windows').append('<div class="window channel" connection-id="0" target="'+data.chan.name.toLowerCase()+'"><div class="topic"></div><div class="scrollback"></div><div class="userlist">Userlist here</div></div>');
 			focusWindow(0,"channel",data.chan.name);
 		}
 		updateWindowList();
@@ -69,7 +69,7 @@ function updateWindowList(){
 function focusWindow(cid,type,name) {
 	var selector = "";
 	if (type.toLowerCase() == "channel") {
-		selector = '#windows .channel[channel-name="'+name+'"][connection-id='+cid+']';
+		selector = '#windows .channel[target="'+name.toLowerCase()+'"][connection-id='+cid+']';
 	} else if (type.toLowerCase() == "status") {
 		selector = '#windows .status[connection-id='+cid+']';
 	}
@@ -88,22 +88,26 @@ $(window).bind('beforeunload',function(){
 });
 $('#toolbar button').click(function(){
 	var text = $('#toolbar input').val();
-	var connid = 0;
-	var channel = "#tmfksoft";
+	var connid = $('#windows .active').attr("connection-id");
+	var channel = $('#windows .active').attr("target");
+	var type = "";
+	
+	if ($('#windows .active').hasClass("channel")) type = "channel";
+	if ($('#windows .active').hasClass("status")) type = "status";
 	
 	if (text.length <= 0 || text == "") return;
 	
 	if (text[0] == "/") {
 		var ex = text.split(" ");
 		if (ex[0].toLowerCase() == "/me") {
-			global.Clients[0].action("#tmfksoft",ex.splice(1).join(" "));
-			$('#windows .channel[channel-name="'+channel.toLowerCase()+'"][connection-id='+connid+'] .scrollback').append("* You "+ex.splice(1).join(" ")+"</br>");
+			global.Clients[0].action(channel,ex.splice(1).join(" "));
+			$('#windows .channel[target="'+channel.toLowerCase()+'"][connection-id='+connid+'] .scrollback').append("* You "+ex.splice(1).join(" ")+"</br>");
 		} else {
 			global.Clients[0].write(text.substr(1));
 		}
 	} else {
-		global.Clients[0].msg("#tmfksoft",text);
-		$('#windows .channel[channel-name="'+channel.toLowerCase()+'"][connection-id='+connid+'] .scrollback').append(" &lt;You&gt; "+text+"</br>");
+		global.Clients[0].msg(channel,text);
+		$('#windows .channel[target="'+channel.toLowerCase()+'"][connection-id='+connid+'] .scrollback').append(" &lt;You&gt; "+text+"</br>");
 	}
 	$('#toolbar input').val('');
 });
