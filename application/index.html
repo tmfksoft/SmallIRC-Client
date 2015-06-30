@@ -17,11 +17,25 @@
 				background:#111;
 				border-right:2px silver;
 				width:148px;
-				
+				color:white;
 				left:0;
 				top:0;
 				bottom:32px;
 				position:fixed;
+			}
+			#chanlist div {
+				background: #343434;
+				font-size: 15px;
+				margin: 3px;
+				padding: 3px;
+				border-radius: 5px;
+			}
+			#chanlist div:hover {
+				background: #818181;
+			}
+			#chanlist div.active {
+				background:whiteSmoke;
+				color:#111;
 			}
 			#windows {
 				position:fixed;
@@ -119,12 +133,7 @@
 			Servers and channels here.
 		</div>
 		<div id="windows">
-			<div class="window status" connection-id="0"></div>
-			<div class="window channel active" connection-id="0" channel-name="#tmfksoft">
-				<div class="topic"></div>
-				<div class="scrollback"></div>
-				<div class="userlist">Userlist goes here</div>
-			</div>
+			<div class="window status active" connection-id="0"></div>
 		</div>
 		<div id="toolbar">
 			<input class="message"></input><button class="send">Send</button>

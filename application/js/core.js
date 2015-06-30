@@ -39,8 +39,47 @@ servers.forEach(function(server){
 		console.log(data.user);
 		$('#windows .channel[channel-name="'+data.chan.name.toLowerCase()+'"][connection-id=0] .scrollback').append(" &lt;"+data.user.nick+"&gt; "+data.message+"<br>");
 	});
+	c.on('join',function(data){
+		if ($('#windows .channel[channel-name="'+data.chan.name.toLowerCase()+'"][connection-id=0]').length <= 0) {
+			$('#windows').append('<div class="window channel" connection-id="0" channel-name="'+data.chan.name.toLowerCase()+'"><div class="topic"></div><div class="scrollback"></div><div class="userlist">Userlist here</div></div>');
+			focusWindow(0,"channel",data.chan.name);
+		}
+		updateWindowList();
+	});
 	global.Clients.push(c);
 });
+function updateWindowList(){
+	$('#chanlist').html('');
+	global.Clients.forEach(function(c,cid){
+		$('#chanlist').append('<div type="status" connection-id="'+cid+'">Connection #'+cid+'</h3>');
+		c.channels.forEach(function(ch){
+			$('#chanlist').append('<div type="channel" target="'+ch.name+'" connection-id="'+cid+'">'+ch.name+'</div>');
+		});
+	});
+	$('#chanlist div').click(function(){
+		var cid = $(this).attr('connection-id');
+		var target = $(this).attr('target');
+		var type = $(this).attr('type');
+		if (focusWindow(cid,type,target)) {
+			$('#chanlist div').removeClass("active");
+			$(this).addClass("active");
+		}
+	});
+}
+function focusWindow(cid,type,name) {
+	var selector = "";
+	if (type.toLowerCase() == "channel") {
+		selector = '#windows .channel[channel-name="'+name+'"][connection-id='+cid+']';
+	} else if (type.toLowerCase() == "status") {
+		selector = '#windows .status[connection-id='+cid+']';
+	}
+	if ($(selector).length > 0) {
+		$('#windows .window').removeClass("active");
+		$(selector).addClass("active");
+		return true;
+	}
+	return false;
+}
 $(window).bind('beforeunload',function(){
 	console.log("Page closed");
 	global.Clients.forEach(function(c){

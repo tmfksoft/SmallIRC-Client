@@ -72,11 +72,12 @@ Client = function(config,server){
 									// Join event.
 									console.log("A user joined a channel");
 									
-									var ch = ex[2].substr(1);
+									var ch = ex[2].substr(1).trim();
 									
 									if (self.getChannel(ch) == null) {
 										self.channels.push(new Channel(ch));
 									}
+									
 									var user = new User(ex[0]);
 									var data = {"user":user,"chan":self.getChannel(ch)};
 									console.log(data);
